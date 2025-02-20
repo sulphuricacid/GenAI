@@ -17,10 +17,10 @@ from langchain.chains import SequentialChain
 load_dotenv()
 
 # Access the environment variables just like you would with os.environ
-key=os.getenv("OPENAI_API_KEY")
+GITHUB_OPENAPIk=os.getenv("OPENAI_API_KEY")
 
 
-llm = ChatOpenAI(openai_api_key=key,model_name="gpt-3.5-turbo", temperature=0.7)
+llm = ChatOpenAI(openai_api_key=GITHUB_OPENAPIk,model_name="gpt-3.5-turbo", temperature=0.7)
 
 template="""
 Text:{text}
