@@ -18,43 +18,43 @@ from langchain_core.runnables import RunnableLambda,RunnableMap
 from operator import itemgetter
 
 
-RESPONSE_JSON = {
-    "1": {
-        "mcq": "multiple choice question",
-        "options": {
-            "a": "choice here",
-            "b": "choice here",
-            "c": "choice here",
-            "d": "choice here",
-        },
-        "correct": "correct answer",
-    },
-    "2": {
-        "mcq": "multiple choice question",
-        "options": {
-            "a": "choice here",
-            "b": "choice here",
-            "c": "choice here",
-            "d": "choice here",
-        },
-        "correct": "correct answer",
-    },
-    "3": {
-        "mcq": "multiple choice question",
-        "options": {
-            "a": "choice here",
-            "b": "choice here",
-            "c": "choice here",
-            "d": "choice here",
-        },
-        "correct": "correct answer",
-    },
-}
+# RESPONSE_JSON = {
+#     "1": {
+#         "mcq": "multiple choice question",
+#         "options": {
+#             "a": "choice here",
+#             "b": "choice here",
+#             "c": "choice here",
+#             "d": "choice here",
+#         },
+#         "correct": "correct answer",
+#     },
+#     "2": {
+#         "mcq": "multiple choice question",
+#         "options": {
+#             "a": "choice here",
+#             "b": "choice here",
+#             "c": "choice here",
+#             "d": "choice here",
+#         },
+#         "correct": "correct answer",
+#     },
+#     "3": {
+#         "mcq": "multiple choice question",
+#         "options": {
+#             "a": "choice here",
+#             "b": "choice here",
+#             "c": "choice here",
+#             "d": "choice here",
+#         },
+#         "correct": "correct answer",
+#     },
+# }
 
-text =  "I am a biology medical book"
-mcq_count = 2
-subject= "Biology"
-tone= "simple"
+# text =  "I am a biology medical book"
+# mcq_count = 2
+# subject= "Biology"
+# tone= "simple"
 
 
 # Load environment variables from the .env file
@@ -66,8 +66,9 @@ print(OPENAPIk)
 
 llm = OpenAI(openai_api_key=OPENAPIk,model_name="gpt-3.5-turbo-instruct", temperature=0.7)
 
-template="""Text:{text}
-You are an expert MCQ maker. Given the above text, it is your job to \
+template="""
+You are an information bank and You are an expert MCQ maker. \
+You job is to gather as much as information as possible on the {subject}  and after collecting the required topic data \
 create a quiz  of {number} multiple choice questions for {subject} students in {tone} tone. 
 Make sure the questions are not repeated and check all the questions to be conforming the text as well.
 Make sure to format your response like  RESPONSE_JSON below  and use it as a guide. \
@@ -76,7 +77,7 @@ Ensure to make {number} MCQs
 {response_json}"""
 
 quiz_generation_prompt = PromptTemplate(
-    input_variables=["text", "number", "subject", "tone", "response_json"],
+    input_variables=[ "number", "subject", "tone", "response_json"],
     template=template)
 
 
@@ -92,6 +93,7 @@ Quiz_MCQs:
 {quiz}
 
 Check from an expert English Writer of the above quiz:
+Display the quiz questions and correct answers along with the evaluation
 """
 
 
@@ -127,8 +129,8 @@ generate_evaluate_chain = chain_with_pass | RunnableLambda(merge_subject_and_qui
 # )
 
 
-generate_evaluate_chain.invoke( {"text": text,
-                        "number": mcq_count,
-                        "subject": subject,
-                        "tone": tone,
-                        "response_json": json.dumps(RESPONSE_JSON)})
+# generate_evaluate_chain.invoke( {"text": text,
+#                         "number": mcq_count,
+#                         "subject": subject,
+#                         "tone": tone,
+#                         "response_json": json.dumps(RESPONSE_JSON)})

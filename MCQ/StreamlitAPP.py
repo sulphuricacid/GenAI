@@ -28,7 +28,7 @@ st.title("MCQs Creator Application with Langchain 🐦⛓️")
 #create a form using st.form
 with st.form("user_inputs"):
     #File input
-    uploaded_file= st.file_uploader("Upload a PDF or Txt File")
+    # uploaded_file= st.file_uploader("Upload a PDF or Txt File")
 
     #Input Fields
     mcq_count = st.number_input("No. of MCQ's", min_value=3, max_value= 50)
@@ -43,14 +43,12 @@ with st.form("user_inputs"):
     button = st.form_submit_button("Create MCQ's")
 
     # check if the button is clicked and all fields have input
-    if button and uploaded_file is not None and mcq_count and subject and tone:
+    if button  and mcq_count and subject and tone:
         with st.spinner("loading..."):
             try:
-                text = read_file(uploaded_file)
                 #count tokens and the cost of API call
                 with get_openai_callback() as cb:
                     response = generate_evaluate_chain.invoke({
-                        "text": text,
                         "number": mcq_count,
                         "subject": subject,
                         "tone": tone,
