@@ -1,0 +1,9 @@
+MCQ/.env
+MCQ/experiments/.ipynb_checkpoints/mcq-checkpoint.ipynb
+MCQ/experiments/logs/
+MCQ/logs/
+MCQ/mcqgenrator.egg-info/
+MCQ/src/mcqgenerator/logs/
+MCQ/src/__pycache__/
+MCQ/src/mcqgenerator/
+MCQ/.ipynb_checkpoints/Untitled-checkpoint.ipynb
